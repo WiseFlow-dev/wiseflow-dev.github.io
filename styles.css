@@ -295,8 +295,15 @@ p { margin: 0 0 1.1rem; }
 
 .case-head { max-width: 44ch; }
 
-.case-text { margin-top: clamp(2.4rem, 5.5vw, 4rem); }
-.case-text p { color: var(--muted); max-width: 60ch; }
+.case-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr);
+  gap: clamp(2.2rem, 5vw, 4rem);
+  align-items: center;
+  margin-top: clamp(2.2rem, 5vw, 3.5rem);
+}
+
+.case-text p { color: var(--muted); max-width: 56ch; }
 .case-text p strong { color: var(--text); font-weight: 600; }
 
 /* stats */
@@ -342,26 +349,23 @@ p { margin: 0 0 1.1rem; }
 
 .case .cta-row { margin-top: 1.9rem; }
 
-/* phone screenshots — full-width band */
+/* phone screenshots */
 .phones {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.1rem, 3vw, 2.2rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(.7rem, 1.6vw, 1.1rem);
   align-items: start;
-  max-width: 920px;
-  margin: clamp(2.6rem, 6vw, 4.2rem) auto 0;
-  padding-top: 1.6rem; /* room for the raised middle phone */
 }
 .phone {
   margin: 0;
-  border-radius: clamp(18px, 2.6vw, 30px);
+  border-radius: clamp(14px, 2.2vw, 24px);
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   background: var(--bg-elev);
 }
 .phone img { aspect-ratio: 720 / 1600; object-fit: cover; height: auto; width: 100%; }
-.phone-mid { transform: translateY(-1.6rem); }
+.phone-mid { transform: translateY(-1.4rem); }
 
 /* ---------- motomation reel ---------- */
 
@@ -482,26 +486,16 @@ html.js .reveal.in {
 
 /* ---------- responsive ---------- */
 
+@media (max-width: 900px) {
+  .case-grid { grid-template-columns: 1fr; }
+  .phones { max-width: 600px; }
+}
+
 @media (max-width: 640px) {
   .nav-optional { display: none; }
   .brand { font-size: .95rem; }
   .reel-grid { grid-template-columns: 1fr; }
   .how-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, auto); row-gap: 1.1rem; }
-
-  /* phones become a swipeable strip that bleeds to the screen edge */
-  .phones {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: .9rem;
-    margin-inline: calc(-1 * clamp(1.25rem, 5vw, 2.5rem));
-    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
-    padding-top: 0;
-    padding-bottom: .6rem;
-    scrollbar-width: none;
-  }
-  .phones::-webkit-scrollbar { display: none; }
-  .phones .phone { flex: 0 0 64%; scroll-snap-align: center; }
-  .phone-mid { transform: none; order: -1; } /* dashboard first in the strip */
+  .phone-mid { transform: translateY(-.8rem); }
 }
